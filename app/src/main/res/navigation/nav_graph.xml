@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/MoviesListingFragment">
+
+    <fragment
+        android:id="@+id/MoviesListingFragment"
+        android:name="com.example.tmdb.features.FirstFragment.MoviesListingFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_movies_listing">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+
+        <action
+            android:id="@+id/action_MoviesListingFragment_to_wishListFragment"
+            app:destination="@id/wishListFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.tmdb.features.SecondFragment.SecondFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/MoviesListingFragment" />
+
+        <argument
+            android:name="movieDetails"
+            app:argType="com.example.tmdb.models.ResultsItem"/>
+    </fragment>
+    <fragment
+        android:id="@+id/wishListFragment"
+        android:name="com.example.tmdb.features.WishListPage.WishListFragment"
+        android:label="fragment_wish_list"
+        tools:layout="@layout/fragment_wish_list" />
+</navigation>
