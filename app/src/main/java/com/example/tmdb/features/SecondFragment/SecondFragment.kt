@@ -25,6 +25,7 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
 
     private val arguments by navArgs<SecondFragmentArgs>()
     private val viewModel by viewModels<SecondFragmentViewModel>()
+    var isClickListenerActivated = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,21 +49,23 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
                 }
 
                 viewModel.isMovieWishlisted.observe(viewLifecycleOwner) { isWishlisted ->
-                    if (isWishlisted) {
+                    if (isWishlisted && isClickListenerActivated) {
+                        viewModel.deleteFromFavourites(arguments.movieDetails)
+                        ivWishlist.setImageResource(R.drawable.ic_wishlist_empty)
+                    } else if (!isWishlisted && isClickListenerActivated) {
+                        viewModel.updateFavourites(arguments.movieDetails)
+                        ivWishlist.setImageResource(R.drawable.ic_wishlist_filled)
+                    } else if (isWishlisted) {
                         ivWishlist.setImageResource(R.drawable.ic_wishlist_filled)
                     } else {
                         ivWishlist.setImageResource(R.drawable.ic_wishlist_empty)
                     }
+                    isClickListenerActivated = false
+                }
 
-                    ivWishlist.setOnClickListener {
-                        if (isWishlisted) {
-                            viewModel.deleteFromFavourites(arguments.movieDetails)
-                            ivWishlist.setImageResource(R.drawable.ic_wishlist_empty)
-                        } else {
-                            viewModel.updateFavourites(arguments.movieDetails)
-                            ivWishlist.setImageResource(R.drawable.ic_wishlist_filled)
-                        }
-                    }
+                ivWishlist.setOnClickListener {
+                    viewModel.checkIfMovieInWishlist(id)
+                    isClickListenerActivated = true
                 }
             }
         }

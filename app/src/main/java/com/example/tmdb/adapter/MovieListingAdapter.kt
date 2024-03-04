@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -48,16 +49,17 @@ class MovieListingAdapter(
             itemView.findViewById<TextView>(R.id.tv_movie_name).text = movieDetails.originalTitle
             itemView.findViewById<TextView>(R.id.tv_movie_description).text = movieDetails.overview
             val imageView = itemView.findViewById<ImageView>(R.id.iv_movie_image)
-
+            val cardView = itemView.findViewById<CardView>(R.id.cv_layout)
             val requestOptions = RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.placeholder)
+
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOptions)
                 .load("https://image.tmdb.org/t/p/original${movieDetails.posterPath}")
                 .into(imageView)
 
-            imageView.setOnClickListener {
+            cardView.setOnClickListener {
                 onPress(movieDetails)
             }
         }
