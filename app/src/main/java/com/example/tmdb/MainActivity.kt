@@ -1,7 +1,6 @@
 package com.example.tmdb
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -37,15 +36,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-
-//        val navController by lazy {
-//            val navHostController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostController
-//            navHostController.navController
-//        }
-//
-//
-//
-
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 

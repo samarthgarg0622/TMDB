@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/MoviesListingFragment"
         android:name="com.example.tmdb.features.FirstFragment.MoviesListingFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_movies_listing">
 
         <action
@@ -23,7 +23,6 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.tmdb.features.SecondFragment.SecondFragment"
-        android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
@@ -34,9 +33,10 @@
             android:name="movieDetails"
             app:argType="com.example.tmdb.models.ResultsItem"/>
     </fragment>
+
     <fragment
         android:id="@+id/wishListFragment"
         android:name="com.example.tmdb.features.WishListPage.WishListFragment"
-        android:label="fragment_wish_list"
+        android:label="Favourites"
         tools:layout="@layout/fragment_wish_list" />
 </navigation>

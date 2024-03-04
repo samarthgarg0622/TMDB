@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
@@ -21,9 +22,14 @@ class WishListFragment : BaseFragment<FragmentWishListBinding>(FragmentWishListB
 
     private val viewModel: WishListViewModel by viewModels()
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.findItem(R.id.wish_list).setVisible(false)
+        super.onPrepareOptionsMenu(menu)
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.actionBar?.title = "Favourites"
+
         val movieListAdapter by lazy {
             MovieListingAdapter{ _ -> }
         }
