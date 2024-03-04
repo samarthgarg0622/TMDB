@@ -33,20 +33,21 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
             viewModel.checkIfMovieInWishlist(id)
             binding.apply {
                 tvMovieName.text = title
-                tvMovieRating.text = voteAverage.toString()
+                tvMovieOverview.text = overview
 
                 val requestOptions = RequestOptions()
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_background)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
 
                 Glide.with(ivMovie.context)
                     .applyDefaultRequestOptions(requestOptions)
                     .load("https://image.tmdb.org/t/p/original${posterPath}")
                     .into(ivMovie)
 
-                addRemoveFavourites.setOnClickListener {
-                    viewModel.updateFavourites(arguments.movieDetails)
-                }
+                Glide.with(ivVerticalImage.context)
+                    .applyDefaultRequestOptions(requestOptions)
+                    .load("https://image.tmdb.org/t/p/original${posterPath}")
+                    .into(ivVerticalImage)
 
                 viewModel.isMovieWishlisted.observe(viewLifecycleOwner) { isWishlisted ->
                     if (isWishlisted && isClickListenerActivated) {
