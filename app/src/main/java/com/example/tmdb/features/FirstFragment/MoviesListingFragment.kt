@@ -37,7 +37,7 @@ class MoviesListingFragment :
 
             binding.moviesList.apply {
                 adapter = movieListAdapter
-                layoutManager = GridLayoutManager(context, 2)
+                layoutManager = GridLayoutManager(context, 1)
                 addOnScrollListener(object : RecyclerView.OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)

@@ -9,6 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "Favourites")
 data class ResultsItem(
+    @SerializedName("overview")
     val overview: String = "",
     @SerializedName("original_language")
     val originalLanguage: String = "",
@@ -31,5 +32,5 @@ data class ResultsItem(
     val id: Int = 0,
     val adult: Boolean = false,
     @SerializedName("vote_count")
-    val voteCount: Int = 0
-) : Parcelable
+    val voteCount: Int = 0,
+    ) : Parcelable

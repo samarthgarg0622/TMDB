@@ -46,6 +46,7 @@ class MovieListingAdapter(
 
         fun bind(movieDetails: ResultsItem, onPress: (ResultsItem) -> Unit) {
             itemView.findViewById<TextView>(R.id.tv_movie_name).text = movieDetails.originalTitle
+            itemView.findViewById<TextView>(R.id.tv_movie_description).text = movieDetails.overview
             val imageView = itemView.findViewById<ImageView>(R.id.iv_movie_image)
 
             val requestOptions = RequestOptions()

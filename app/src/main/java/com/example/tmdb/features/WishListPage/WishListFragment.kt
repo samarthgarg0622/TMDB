@@ -27,21 +27,25 @@ class WishListFragment : BaseFragment<FragmentWishListBinding>(FragmentWishListB
         super.onPrepareOptionsMenu(menu)
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val movieListAdapter by lazy {
-            MovieListingAdapter{ _ -> }
+            MovieListingAdapter { _ -> }
         }
-        viewModel.getWishListMovies()
 
-        viewModel.wishListMoviesLiveData.observe(viewLifecycleOwner) {
-            movieListAdapter.modifyDataSetChanged(it)
+        with(viewModel) {
+            getWishListMovies()
+
+            wishListMoviesLiveData.observe(viewLifecycleOwner) {
+                movieListAdapter.modifyDataSetChanged(it)
+            }
         }
 
         binding.rvWishList.apply {
             adapter = movieListAdapter
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, 1)
         }
     }
 }
