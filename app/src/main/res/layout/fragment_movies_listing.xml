@@ -19,20 +19,29 @@
             style="@style/ShapeAppearanceOverlay.Material3.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
+            android:checked="true"
+            android:clickable="true"
             android:text="popular"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:chipBackgroundColor="@color/background_color_buttons" />
+            app:chipBackgroundColor="@color/background_color_buttons"
+            app:chipStrokeColor="@color/bg_chip_color_selection"
+            app:chipStrokeWidth="2dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/category2"
             style="@style/ShapeAppearanceOverlay.Material3.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkable="true"
+            android:clickable="true"
             android:text="top_rated"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:chipBackgroundColor="#252836" />
+            app:chipBackgroundColor="@color/background_color_buttons"
+            app:chipStrokeColor="@color/bg_chip_color_selection"
+            app:chipStrokeWidth="2dp" />
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
