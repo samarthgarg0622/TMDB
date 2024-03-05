@@ -43,10 +43,6 @@ class MoviesListingFragment :
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     }
                 }
-//                it.body()?.results?.let { it1 ->
-//                    updateMoviesList(it1)
-//                    moviesListSize = it1.size
-//                }
             }
 
             binding.moviesList.apply {
@@ -70,18 +66,17 @@ class MoviesListingFragment :
             moviesList.observe(viewLifecycleOwner) {
                 movieListAdapter.modifyDataSetChanged(it)
             }
+
             binding.apply {
                 category1.setOnClickListener {
                     category = category1.text.toString()
                     getMovies(category)
-                    category2.setOnClickListener {
-                        category = category2.text.toString()
-                        getMovies(category)
-                    }
-
+                }
+                category2.setOnClickListener {
+                    category = category2.text.toString()
+                    getMovies(category)
                 }
             }
         }
-
     }
 }
