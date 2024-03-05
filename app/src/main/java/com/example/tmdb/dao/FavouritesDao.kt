@@ -16,7 +16,7 @@ interface FavouritesDao {
     suspend fun removeFavourite(id: Int)
 
     @Query("SELECT * FROM favourites")
-    suspend fun getFavourites() : List<ResultsItem>
+    suspend fun getFavourites(): List<ResultsItem>
 
     @Query("SELECT COUNT(*) FROM favourites WHERE id = :id")
     suspend fun checkIfMovieInWishlist(id: Int): Int

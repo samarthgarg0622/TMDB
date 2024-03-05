@@ -2,11 +2,13 @@ package com.example.tmdb.features.FirstFragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.findingfalcone.util.Resource
 import com.example.tmdb.adapter.MovieListingAdapter
 import com.example.tmdb.baseComponent.BaseFragment
 import com.example.tmdb.databinding.FragmentMoviesListingBinding
@@ -29,10 +31,22 @@ class MoviesListingFragment :
         super.onViewCreated(view, savedInstanceState)
         viewModel.apply {
             moviesResponse.observe(viewLifecycleOwner) {
-                it.body()?.results?.let { it1 ->
-                    updateMoviesList(it1)
-                    moviesListSize = it1.size
+                when (it.status) {
+                    Resource.Status.SUCCESS -> {
+                        it.data?.results?.let { listOfMovies ->
+                            updateMoviesList(listOfMovies)
+                            moviesListSize = listOfMovies.size
+                        }
+                    }
+
+                    Resource.Status.ERROR -> {
+                        Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
+//                it.body()?.results?.let { it1 ->
+//                    updateMoviesList(it1)
+//                    moviesListSize = it1.size
+//                }
             }
 
             binding.moviesList.apply {

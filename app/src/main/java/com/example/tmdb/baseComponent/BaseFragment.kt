@@ -13,7 +13,7 @@ abstract class BaseFragment<T : ViewBinding>(
 
     private var _binding: T? = null
     val binding: T
-    get() = _binding as T
+        get() = _binding as T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ abstract class BaseFragment<T : ViewBinding>(
     ): View? {
         // Inflate the layout for this fragment
         _binding = bindingInflater.invoke(inflater)
-        if (_binding == null){
+        if (_binding == null) {
             throw IllegalArgumentException("BINDING_ERROR_MESSAGE")
         }
         return binding.root
