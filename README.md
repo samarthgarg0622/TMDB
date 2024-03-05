@@ -1,4 +1,3 @@
-TMDB Application
 Welcome to the TMDB (The Movie Database) Application! This application allows you to explore a vast collection of movies, view their details, and manage your favorites effortlessly.
 
 Features
