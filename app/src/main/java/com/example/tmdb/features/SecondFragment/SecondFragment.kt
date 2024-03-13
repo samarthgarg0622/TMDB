@@ -85,6 +85,16 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
                         }
                     }
                 }
+
+                btnShare.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, "${tvMovieName.text}")
+                    }
+                    if (context?.packageManager?.let { it1 -> intent.resolveActivity(it1) } != null) {
+                        startActivity(intent)
+                    }
+                }
             }
         }
     }
