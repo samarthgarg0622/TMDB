@@ -1,5 +1,8 @@
 package com.example.tmdb.features.SecondFragment
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -67,6 +70,20 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
                 ivWishlist.setOnClickListener {
                     viewModel.checkIfMovieInWishlist(id)
                     isClickListenerActivated = true
+                }
+
+                btnTrailer.setOnClickListener {
+                    Intent(
+                        Intent.ACTION_SEARCH
+                    ).also {
+                        it.`package` = "com.google.android.youtube"
+                        it.putExtra("query", "${tvMovieName.text} trailer")
+                        try {
+                            startActivity(it)
+                        } catch (e: ActivityNotFoundException) {
+                            e.printStackTrace()
+                        }
+                    }
                 }
             }
         }
