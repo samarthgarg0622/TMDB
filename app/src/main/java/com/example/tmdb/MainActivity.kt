@@ -1,5 +1,7 @@
 package com.example.tmdb
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,10 +11,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.navigation.NavHostController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.tmdb.databinding.ActivityMainBinding
-import com.example.tmdb.features.FirstFragment.MoviesListingFragmentDirections
+import com.example.tmdb.receiver.InternetConnectivityReceiver
 import com.example.tmdb.utils.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val internetConnectivityReceiver = InternetConnectivityReceiver()
 
     private val navController by lazy {
         val navHostFragment =
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
+        registerReceiver(internetConnectivityReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -65,5 +67,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(internetConnectivityReceiver)
     }
 }

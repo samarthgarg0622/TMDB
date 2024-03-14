@@ -1,5 +1,5 @@
 *.iml
-*.idea
+.idea
 .gradle
 /local.properties
 /.idea/caches
@@ -14,3 +14,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+build/
+analytics/build/
+oppwa.mobile/build/
+.idea/deploymentTargetDropDown.xml
+.idea/*
