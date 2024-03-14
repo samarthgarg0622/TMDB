@@ -6,11 +6,13 @@ Browse through an extensive collection of movies categorized into two sections:
 
 Popular: Explore movies trending worldwide.
 Top Rated: Discover top-rated movies based on user ratings.
+
 2. Movie Details
 Click on any movie card to view detailed information, including:
 
 Movie description
 Images in enhanced form
+
 3. Add to Favorites
 Add your favorite movies to your local storage with the click of a button. Simply navigate to the movie details page and hit the "Add to Favorites" button to save it for later.
 
@@ -22,10 +24,14 @@ Screens
 
 Features radio chip buttons for selecting movie categories.
 Displays a list of movies based on the selected category.
+
 2. Movie Details Screen
 
 Provides a comprehensive view of a selected movie, including its description and enhanced images.
 Allows users to add the movie to their favorites.
+Share your movie name text with your loved ones!
+Watch the trailer of the movie directly on YouTube.
+
 3. Favorites Screen
 
 Shows a list of user-selected favorite movies.
@@ -36,5 +42,8 @@ To get started with the TMDB Application:
 Clone the repository to your local machine.
 Build and run the application on your preferred Android emulator or device.
 Explore movies, view details, and manage your favorites seamlessly!
+
+Or you can go to Actions and trigger the workflow and download the apk directly.
+
 Contributors
  - Samarth Garg
