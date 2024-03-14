@@ -10,11 +10,15 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.NavHostFragment
 import com.example.tmdb.databinding.ActivityMainBinding
 import com.example.tmdb.receiver.InternetConnectivityReceiver
 import com.example.tmdb.utils.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
+import android.Manifest
+import android.content.Intent
+import android.os.Build
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -32,6 +36,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -55,6 +63,10 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.wish_list -> {
                 navController.navigateSafe(R.id.wishListFragment)
+                Intent(applicationContext, ForegroundService::class.java).also {
+                    it.action = ForegroundService.ACTIONS.START.toString()
+                    startService(it)
+                }
                 return true
             }
 
@@ -71,5 +83,9 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(internetConnectivityReceiver)
+        Intent(applicationContext, ForegroundService::class.java).also {
+            it.action = ForegroundService.ACTIONS.STOP.toString()
+            startService(it)
+        }
     }
 }
