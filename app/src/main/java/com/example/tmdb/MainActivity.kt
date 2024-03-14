@@ -10,7 +10,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import com.example.tmdb.databinding.ActivityMainBinding
 import com.example.tmdb.receiver.InternetConnectivityReceiver
