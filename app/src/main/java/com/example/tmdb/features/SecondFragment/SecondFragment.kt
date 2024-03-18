@@ -13,6 +13,7 @@ import com.example.tmdb.R
 import com.example.tmdb.baseComponent.BaseFragment
 import com.example.tmdb.databinding.FragmentSecondBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.RuntimeException
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -67,17 +68,18 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
                 }
 
                 btnTrailer.setOnClickListener {
-                    Intent(
-                        Intent.ACTION_SEARCH
-                    ).also {
-                        it.`package` = "com.google.android.youtube"
-                        it.putExtra("query", "${tvMovieName.text} trailer")
-                        try {
-                            startActivity(it)
-                        } catch (e: ActivityNotFoundException) {
-                            e.printStackTrace()
-                        }
-                    }
+                    throw RuntimeException("Test crash")
+//                    Intent(
+//                        Intent.ACTION_SEARCH
+//                    ).also {
+//                        it.`package` = "com.google.android.youtube"
+//                        it.putExtra("query", "${tvMovieName.text} trailer")
+//                        try {
+//                            startActivity(it)
+//                        } catch (e: ActivityNotFoundException) {
+//                            e.printStackTrace()
+//                        }
+//                    }
                 }
 
                 btnShare.setOnClickListener {

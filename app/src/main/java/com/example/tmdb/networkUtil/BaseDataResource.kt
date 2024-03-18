@@ -1,5 +1,6 @@
 package com.example.findingfalcone.util
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -11,6 +12,7 @@ abstract class BaseDataSource {
     protected suspend fun <T> getResult(call: suspend () -> Response<T>): Resource<T> {
         try {
             val response = call()
+            logApiResponseError(response.code(), response.message())
             if (response.isSuccessful) {
                 return Resource.success(response.body())
             }
@@ -34,6 +36,13 @@ abstract class BaseDataSource {
         } catch (e: Exception) {
             return error(e.message ?: e.toString())
         }
+    }
+
+    private fun logApiResponseError(code: Int, message: String) {
+        val crashlytics = FirebaseCrashlytics.getInstance()
+        crashlytics.setCustomKey("errorCode", code)
+        crashlytics.setCustomKey("errorMessage", message)
+        crashlytics.recordException(java.lang.Exception("ja kr logs m dekh"))
     }
 
     private fun <T> error(message: String): Resource<T> {

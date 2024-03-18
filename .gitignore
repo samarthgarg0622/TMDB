@@ -17,5 +17,5 @@ local.properties
 build/
 analytics/build/
 oppwa.mobile/build/
-.idea/deploymentTargetDropDown.xml
-.idea/*
+/.idea/deploymentTargetDropDown.xml
+.idea/*.xml
