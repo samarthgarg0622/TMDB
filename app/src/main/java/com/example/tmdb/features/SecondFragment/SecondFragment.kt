@@ -68,18 +68,17 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
                 }
 
                 btnTrailer.setOnClickListener {
-                    throw RuntimeException("Test crash")
-//                    Intent(
-//                        Intent.ACTION_SEARCH
-//                    ).also {
-//                        it.`package` = "com.google.android.youtube"
-//                        it.putExtra("query", "${tvMovieName.text} trailer")
-//                        try {
-//                            startActivity(it)
-//                        } catch (e: ActivityNotFoundException) {
-//                            e.printStackTrace()
-//                        }
-//                    }
+                    Intent(
+                        Intent.ACTION_SEARCH
+                    ).also {
+                        it.`package` = "com.google.android.youtube"
+                        it.putExtra("query", "${tvMovieName.text} trailer")
+                        try {
+                            startActivity(it)
+                        } catch (e: ActivityNotFoundException) {
+                            e.printStackTrace()
+                        }
+                    }
                 }
 
                 btnShare.setOnClickListener {
