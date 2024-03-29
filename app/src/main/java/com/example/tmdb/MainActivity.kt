@@ -63,10 +63,6 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.wish_list -> {
                 navController.navigateSafe(R.id.wishListFragment)
-                Intent(applicationContext, ForegroundService::class.java).also {
-                    it.action = ForegroundService.ACTIONS.START.toString()
-                    startService(it)
-                }
                 return true
             }
 
@@ -83,9 +79,5 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(internetConnectivityReceiver)
-        Intent(applicationContext, ForegroundService::class.java).also {
-            it.action = ForegroundService.ACTIONS.STOP.toString()
-            startService(it)
-        }
     }
 }

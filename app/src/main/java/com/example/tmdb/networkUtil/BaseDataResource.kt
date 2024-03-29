@@ -28,7 +28,7 @@ abstract class BaseDataSource {
                     }
                 }
             } catch (e: java.lang.Exception) {
-                errorMessage = response.message()
+                errorMessage = e.message.toString()
             } finally {
                 if (errorMessage.isEmpty()) errorMessage = OOPS_SOMETHING_WENT_WRONG
             }

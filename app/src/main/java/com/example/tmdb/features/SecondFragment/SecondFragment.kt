@@ -1,19 +1,23 @@
 package com.example.tmdb.features.SecondFragment
 
 import android.content.ActivityNotFoundException
+import android.content.ContextWrapper
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.tmdb.ForegroundService
 import com.example.tmdb.R
 import com.example.tmdb.baseComponent.BaseFragment
 import com.example.tmdb.databinding.FragmentSecondBinding
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.util.MimeTypes
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.RuntimeException
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -24,6 +28,7 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
     private val arguments by navArgs<SecondFragmentArgs>()
     private val viewModel by viewModels<SecondFragmentViewModel>()
     var isClickListenerActivated = false
+    lateinit var playerView : ExoPlayer
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,10 +42,22 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
 
-                Glide.with(ivMovie.context)
-                    .applyDefaultRequestOptions(requestOptions)
-                    .load("https://image.tmdb.org/t/p/original${posterPath}")
-                    .into(ivMovie)
+                playerView = ExoPlayer.Builder(requireContext()).build()
+                videoView.player = playerView
+                val mediaItem = MediaItem.Builder()
+                    .setUri(Uri.parse(viewModel.url))
+                    .setMimeType(MimeTypes.BASE_TYPE_VIDEO)
+                    .build()
+
+                playerView.apply {
+                    setMediaItem(mediaItem)
+                    prepare()
+                    play()
+                    Intent(activity?.applicationContext, ForegroundService::class.java).also {
+                        it.action = ForegroundService.ACTIONS.START.toString()
+                        ContextWrapper(context).startService(it)
+                    }
+                }
 
                 Glide.with(ivVerticalImage.context)
                     .applyDefaultRequestOptions(requestOptions)
@@ -91,6 +108,15 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>(FragmentSecondBinding
                     }
                 }
             }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        playerView.release()
+        Intent(activity?.applicationContext, ForegroundService:: class.java).also {
+            it.action = ForegroundService.ACTIONS.STOP.toString()
+            ContextWrapper(context).stopService(it)
         }
     }
 }

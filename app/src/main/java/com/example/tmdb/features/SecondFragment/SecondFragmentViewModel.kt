@@ -14,6 +14,7 @@ class SecondFragmentViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository
 ): ViewModel() {
     var isMovieWishlisted = MutableLiveData<Boolean>()
+    val url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
     fun updateFavourites(movie: ResultsItem) {
         viewModelScope.launch {
             moviesRepository.addFavourites(movie)
