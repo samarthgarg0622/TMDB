@@ -17,8 +17,8 @@ import com.example.tmdb.receiver.InternetConnectivityReceiver
 import com.example.tmdb.utils.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
 import android.Manifest
-import android.content.Intent
 import android.os.Build
+import android.widget.Toast
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -48,6 +48,25 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
         registerReceiver(internetConnectivityReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+
+        binding.bottomNav.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.movie -> {
+                    Toast.makeText(this, "Movie Clicked", Toast.LENGTH_SHORT).show()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.music -> {
+                    Toast.makeText(this, "Music Clicked", Toast.LENGTH_SHORT).show()
+                    return@setOnItemSelectedListener true
+                }
+
+//                else -> navController.navigateSafe(R.id.SecondFragment)
+                else -> {
+                    Toast.makeText(this, "Music Clicked", Toast.LENGTH_SHORT).show()
+                    return@setOnItemSelectedListener true
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
