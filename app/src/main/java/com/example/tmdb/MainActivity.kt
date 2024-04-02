@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
 
-//                else -> navController.navigateSafe(R.id.SecondFragment)
                 else -> {
                     Toast.makeText(this, "Music Clicked", Toast.LENGTH_SHORT).show()
                     return@setOnItemSelectedListener true
