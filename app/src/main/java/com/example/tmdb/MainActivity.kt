@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         navHostFragment.navController
 
     }
+    //Added test comment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
